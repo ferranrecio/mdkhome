@@ -1,5 +1,11 @@
 # Custom Moodle tracker localhost homepage
 
+## Requirements
+
+Optional:
+
+- php-redis -> it uses redis cache to store the instances data.
+
 ## How to configure
 
 1. Copy the code in you localhost/home directory.
