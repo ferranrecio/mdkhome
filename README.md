@@ -25,10 +25,14 @@ You can clone the project by running this commands on your localhost:
 git clone https://github.com/ferranrecio/mdkhome.git home
 ```
 
+If you want to use a different directory, you can change the $CFG->dirroot
+and $CFG->wwwroot variables. See the "Change paths" section for more details.
+
 ## How to configure
 
 Once you have the code in your localhost/home directory, you can configure
-it by creating a locahost/home.php file with the content:
+it by creating a locahost/index.php file (or locahost/home.php if you don't
+want to override the default localhost index) with the content:
 
 ```php
 <?php
@@ -126,7 +130,7 @@ $CFG = new stdClass();
 
 $CFG->redisip = '127.0.0.1'; // Set an alternative IP.
 $CFG->redisport = 6379; // Set an alternative port.
-$CFG->rediscachename = $CFG->rediscachename ?? 'locahostinstances'; // Change the entry name if you want.
+$CFG->rediscachename = 'locahostinstances'; // Change the entry name if you want.
 
 require_once('home/index.php');
 ```
