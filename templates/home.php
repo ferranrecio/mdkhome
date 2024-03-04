@@ -25,6 +25,10 @@
       background-color: lightyellow;
     }
 
+    .inprogress {
+      background-color: lightcyan;
+    }
+
     .instance {
       transition: background-color 500ms linear;
     }

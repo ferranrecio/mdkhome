@@ -123,6 +123,7 @@ class Tracker {
         element.querySelector(this.selectors.STATUS).title = info.status;
 
         element.classList.toggle('closed', info.status == 'Closed');
+        element.classList.toggle('inprogress', info.status == 'Development in progress');
 
         setTimeout(
             () => {
