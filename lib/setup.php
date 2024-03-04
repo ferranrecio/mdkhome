@@ -20,9 +20,16 @@ function setCfg() {
     $CFG->moodlesdir = $CFG->moodlesdir ?? dirname(dirname(__DIR__)) . '/m';
     $CFG->maininstance = $CFG->maininstance ?? $CFG->moodlesdir . '/main';
 
+    // Internal paths.
     $CFG->wwwpix = $CFG->wwwroot . '/pix';
     $CFG->wwwcss = $CFG->wwwroot . '/css';
     $CFG->wwwjs = $CFG->wwwroot . '/js';
     $CFG->helpers = $CFG->wwwroot . '/helpers';
     $CFG->extras = $CFG->extras ?? [];
+
+    // Redis related settings.
+    $CFG->redisip = $CFG->redisip ?? '127.0.0.1';
+    $CFG->redisport = $CFG->redisport ?? 6379;
+    $CFG->rediscachename = $CFG->rediscachename ?? 'locahostinstances';
+    $CFG->rediscachetime = $CFG->rediscachetime ?? 22000;
 }

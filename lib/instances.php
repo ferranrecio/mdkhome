@@ -51,7 +51,7 @@ function instance_icon_url($entry): string {
     }
 
     $base = $CFG->wwwpix . '/';
-    if (file_exists('./img/' . $entry->name . '.png')) {
+    if (file_exists($CFG->dirroot . '/pix/' . $entry->name . '.png')) {
         return $base . $entry->name . '.png';
     }
     if ($entry->name == 'integration') {
@@ -102,6 +102,8 @@ function scan_instances(): array {
  * @return stdClass|null The entry information object, or null if the entry is invalid.
  */
 function entry_info(string $entry, string $baseversion): ?stdClass {
+    global $CFG;
+
     if ($entry == "." || $entry == ".." || $entry == "mdk") {
         return null;
     }
@@ -116,7 +118,7 @@ function entry_info(string $entry, string $baseversion): ?stdClass {
         $info->mdl = clean_mdl_name($info->name);
     }
 
-    $gitpath = './m/' . $entry . '/.git/HEAD';
+    $gitpath = $CFG->moodlesdir . '/' . $entry . '/.git/HEAD';
     if (file_exists($gitpath)) {
         $stringfromfile = file($gitpath, FILE_USE_INCLUDE_PATH);
         $stringsfromfile = explode('/', $stringfromfile[0]);
@@ -128,7 +130,7 @@ function entry_info(string $entry, string $baseversion): ?stdClass {
         }
     }
 
-    $versionpath = "./m/{$entry}/version.php";
+    $versionpath = "{$CFG->moodlesdir}/{$entry}/version.php";
     if (file_exists($versionpath)) {
         $info->version = get_version_from_file($versionpath);
         $info->rebase = ($info->version < $baseversion);
@@ -138,7 +140,7 @@ function entry_info(string $entry, string $baseversion): ?stdClass {
     }
 
     $output = [];
-    $command = "cd ./m/{$entry} ; git status --porcelain";
+    $command = "cd {$CFG->moodlesdir}/{$entry} ; git status --porcelain";
     exec($command, $output);
     if (!empty($output)) {
         $info->dirty = $output;
@@ -153,7 +155,7 @@ function entry_info(string $entry, string $baseversion): ?stdClass {
  * @return stdClass|array The instances information.
  */
 function get_instances_info() {
-    global $_GET;
+    global $_GET, $CFG;
 
     $refresh = $_GET['refresh'] ?? false;
 
@@ -162,9 +164,9 @@ function get_instances_info() {
     }
 
     $redis = new Redis();
-    $redis->connect('127.0.0.1', 6379);
+    $redis->connect($CFG->redisip, $CFG->redisport);
     try {
-        $json = $redis->get('locahostinstances');
+        $json = $redis->get($CFG->rediscachename);
         $instances = json_decode($json);
     } catch (\Throwable $th) {
         $instances = [];
@@ -172,7 +174,7 @@ function get_instances_info() {
 
     if (empty($instances) || $refresh) {
         $instances = scan_instances();
-        $redis->setex('locahostinstances', 22000, json_encode($instances));
+        $redis->setex($CFG->rediscachename, $CFG->rediscachetime, json_encode($instances));
     }
 
     return $instances;
