@@ -62,6 +62,22 @@ $CFG->extras = [
 require_once 'home/index.php';
 ```
 
+## Include the extra utils pages
+
+There a few util tools included in the home page. You can include them by
+adding the following code to the home.php file.
+
+```php
+<?php
+global $CFG;
+$CFG = new stdClass();
+
+// This will do all the magic.
+$CFG->includeutils = true;
+
+require_once 'home/index.php';
+```
+
 ## How to cusmtoize instance icons
 
 By default, the instance icons uses the instance name. However, you can provide
