@@ -32,4 +32,22 @@ function setCfg() {
     $CFG->redisport = $CFG->redisport ?? 6379;
     $CFG->rediscachename = $CFG->rediscachename ?? 'locahostinstances';
     $CFG->rediscachetime = $CFG->rediscachetime ?? 22000;
+
+    // Include utils.
+    $CFG->includeutils = $CFG->includeutils ?? false;
+    if($CFG->includeutils) {
+        setUtils();
+    }
+}
+
+function setUtils() {
+    global $CFG;
+    if (!isset($CFG->extras)) {
+        $CFG->extras = [];
+    }
+    if (!isset($CFG->extras['Utils'])) {
+        $CFG->extras['Utils'] = [];
+    }
+    $CFG->extras['Utils'][] = ['title' => 'JSON', 'url' => $CFG->wwwroot . '/utils/json.php'];
+    $CFG->extras['Utils'][] = ['title' => 'Patch viewer', 'url' => $CFG->wwwroot . '/utils/PatchViewer.html'];
 }
