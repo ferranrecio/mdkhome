@@ -94,6 +94,22 @@ function scan_instances(): array {
     return $instances;
 }
 
+function instance_type($entry) {
+    if (strpos($entry, 'int') === 0) {
+        return 'int';
+    }
+    if (strpos($entry, 'master') === 0 || strpos($entry, 'main') === 0) {
+        return 'stable';
+    }
+    if (strpos($entry, 'stable_') === 0) {
+        return 'stable';
+    }
+    if (strpos($entry, 'MDL') === 0) {
+        return 'MDL';
+    }
+    return 'other';
+}
+
 /**
  * Retrieves information about an entry.
  *
@@ -112,6 +128,7 @@ function entry_info(string $entry, string $baseversion): ?stdClass {
         'title' => "¿$entry?",
         'name' => $entry,
         'mdl' => '',
+        'type' => instance_type($entry),
     ];
 
     if (is_an_mdl($entry)) {

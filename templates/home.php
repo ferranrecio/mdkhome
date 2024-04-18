@@ -43,7 +43,11 @@
         <div class="row h-100">
           <div class="col-sm">
             <h2 data-tracker="refresh">Local instances <a href="?refresh=true">[Reload]</a></h2>
-            <ul class="list-group">
+            <?php
+              $template = new Template();
+              $template->render('filters');
+            ?>
+            <ul class="list-group" id="instanceslist">
               <?php
               foreach ($instances as $info) {
                 $icon = instance_icon_url($info);
@@ -52,6 +56,7 @@
                 <li
                   class="list-group-item instance d-flex flex-column"
                   data-mdl="<?php echo $info->mdl; ?>"
+                  data-type="<?php echo $info->type; ?>"
                 >
                   <div class="d-flex align-items-center">
                     <img class="me-2" src="<?php echo $icon; ?>" height="25">

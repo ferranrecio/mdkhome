@@ -15,7 +15,9 @@ class Tracker {
             REFRESH: `[data-tracker="refresh"]`,
         };
 
-        this.scanInfo();
+        if (window.location.hostname === 'localhost') {
+            this.scanInfo();
+        }
     }
 
     async makeRequest(method, url, data) {
