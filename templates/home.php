@@ -32,6 +32,15 @@
     .instance {
       transition: background-color 500ms linear;
     }
+
+    input[type="radio"] {
+      display: none;
+    }
+
+    input[type="radio"]:checked+label {
+      font-weight: bold;
+      border-bottom: 2px solid black;
+    }
   </style>
 </head>
 
