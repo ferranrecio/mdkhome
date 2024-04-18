@@ -10,6 +10,7 @@ class Template {
     public function render($page) {
         global $CFG;
         extract($this->data);
+        $template = $this;
         include($CFG->dirroot . '/templates/' . $page . '.php');
     }
 }

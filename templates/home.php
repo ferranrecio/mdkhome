@@ -53,7 +53,6 @@
           <div class="col-sm">
             <h2 data-tracker="refresh">Local instances <a href="?refresh=true">[Reload]</a></h2>
             <?php
-              $template = new Template();
               $template->render('filters');
             ?>
             <ul class="list-group" id="instanceslist">
