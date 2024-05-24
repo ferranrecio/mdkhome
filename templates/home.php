@@ -34,12 +34,16 @@
     }
 
     input[type="radio"] {
-      display: none;
+      opacity: 0;
     }
 
     input[type="radio"]:checked+label {
       font-weight: bold;
       border-bottom: 2px solid black;
+    }
+
+    input[type="radio"]:focus+label {
+      border-bottom: 2px solid var(--bs-primary);
     }
   </style>
 </head>
@@ -72,6 +76,15 @@
                       <?php echo $info->name; ?>
                     </a>
                     <small class="<?php echo $alert; ?> ms-auto"><?php echo $info->version; ?></small>
+                    <?php
+                    if (!empty($info->idelink)) {
+                    ?>
+                    <a class="ms-2" href="<?php echo $info->idelink; ?>">
+                      <img src="<?php echo $CFG->wwwpix . '/vscode.png'; ?>" height="18">
+                    </a>
+                    <?php
+                    }
+                    ?>
                     <span class="ms-2" title="Unknown" data-tracker="status">
                       <a href="#" data-tracker="url">
                         <img src="<?php echo $CFG->wwwpix . '/help.gif'; ?>" alt="ISSUE" data-tracker="icon">
