@@ -18,5 +18,9 @@ Types of changes:
 
 ### Added
 
+## [0.1.01] - 2024-05-24
+
+### Added
+
 - Now instances have VScode links to open the project.
 
