@@ -129,6 +129,7 @@ function entry_info(string $entry, string $baseversion): ?stdClass {
         'name' => $entry,
         'mdl' => '',
         'type' => instance_type($entry),
+        'idelink' => 'vscode://file' . realpath($CFG->moodlesdir . '/' . $entry),
     ];
 
     if (is_an_mdl($entry)) {
