@@ -22,5 +22,10 @@ Types of changes:
 
 ### Added
 
-- Now instances have VScode links to open the project.
+- Added instance branch name when it is not in the description.
 
+## [0.1.01] - 2024-05-24
+
+### Added
+
+- Now instances have VScode links to open the project.
