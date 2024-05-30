@@ -25,6 +25,10 @@
       background-color: lightyellow;
     }
 
+    .dimmed {
+      opacity: 0.6;
+    }
+
     .inprogress {
       background-color: lightcyan;
     }
@@ -75,6 +79,10 @@
                     <a href="<?php echo $CFG->moodleswwwroot . '/' . $info->name; ?>">
                       <?php echo $info->name; ?>
                     </a>
+                    <small
+                      class="dimmed d-none ms-2 me-auto text-secondary fst-italic"
+                      data-tracker="branch"
+                    ><?php echo $info->branch; ?></small>
                     <small class="<?php echo $alert; ?> ms-auto"><?php echo $info->version; ?></small>
                     <?php
                     if (!empty($info->idelink)) {

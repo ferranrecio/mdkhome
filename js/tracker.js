@@ -8,6 +8,7 @@ class Tracker {
 
         this.selectors = {
             MDL: `[data-mdl]`,
+            BRANCH: `[data-tracker="branch"]`,
             TITLE: `[data-tracker="title"]`,
             ICON: `[data-tracker="icon"]`,
             URL: `[data-tracker="url"]`,
@@ -123,6 +124,7 @@ class Tracker {
         element.querySelector(this.selectors.TITLE).innerText = info.title;
         element.querySelector(this.selectors.URL).href = info.url;
         element.querySelector(this.selectors.STATUS).title = info.status;
+        element.querySelector(this.selectors.BRANCH).classList.remove('d-none');
 
         element.classList.toggle('closed', info.status == 'Closed');
         element.classList.toggle('inprogress', info.status == 'Development in progress');
