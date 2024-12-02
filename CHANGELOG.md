@@ -18,6 +18,12 @@ Types of changes:
 
 ### Added
 
+## [0.1.03] - 2024-12-02
+
+### Added
+
+- New adminer util with configuration variables.
+
 ## [0.1.02] - 2024-05-24
 
 ### Added

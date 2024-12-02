@@ -1,10 +1,16 @@
 <?php
 
-function setup() {
+/**
+ * Setup the environment.
+ * @return stdClass all config settings.
+ */
+function setup(): stdClass {
+    global $CFG;
     setCfg();
     // Allow CORS from tracker.moodle.org
     header('Access-Control-Allow-Origin: https://tracker.moodle.org');
     ini_set('default_socket_timeout', 1);
+    return $CFG;
 }
 
 function setCfg() {
@@ -33,6 +39,14 @@ function setCfg() {
     $CFG->rediscachename = $CFG->rediscachename ?? 'locahostinstances';
     $CFG->rediscachetime = $CFG->rediscachetime ?? 22000;
 
+    // External DBs settings.
+    $CFG->mysqlserver = $CFG->mysqlserver ?? '127.0.0.1';
+    $CFG->mysqluser = $CFG->mysqluser ?? 'root';
+    $CFG->mysqlpassword = $CFG->mysqlpassword ?? 'root';
+    $CFG->pgserver = $CFG->pgserver ?? '127.0.0.1';
+    $CFG->pguser = $CFG->pguser ?? 'admin';
+    $CFG->pgpassword = $CFG->pgpassword ?? 'test';
+
     // Include utils.
     $CFG->includeutils = $CFG->includeutils ?? false;
     if($CFG->includeutils) {
@@ -50,4 +64,5 @@ function setUtils() {
     }
     $CFG->extras['Utils'][] = ['title' => 'JSON', 'url' => $CFG->wwwroot . '/utils/json.php'];
     $CFG->extras['Utils'][] = ['title' => 'Patch viewer', 'url' => $CFG->wwwroot . '/utils/PatchViewer.html'];
+    $CFG->extras['Utils'][] = ['title' => 'Adminer', 'url' => $CFG->wwwroot . '/utils/adminer.php'];
 }
