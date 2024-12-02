@@ -151,6 +151,31 @@ $CFG->rediscachename = 'locahostinstances'; // Change the entry name if you want
 require_once('home/index.php');
 ```
 
+## Setup adminer
+
+The page includes a custom adminer with fast login. You can configure the login
+credentials by adding the following code to the localhost file.
+
+```php
+<?php
+global $CFG;
+$CFG = new stdClass();
+
+// Adminer is part of the included utils, so you need to enable them.
+$CFG->includeutils = true;
+
+// Configure MySQL.
+$CFG->mysqlserver = '127.0.0.1';
+$CFG->mysqluser = 'root';
+$CFG->mysqlpassword = 'root';
+// Configure PostgreSQL.
+$CFG->pgserver = '127.0.0.1';
+$CFG->pguser = 'admin';
+$CFG->pgpassword = 'test';
+```
+
+If your don't use MySQl or PostgreSQL, you can leave empty the server variable.
+
 ## Check other $CFG variables
 
 All the $CFG variables are defined in the lib/setup.php file. You can check them
