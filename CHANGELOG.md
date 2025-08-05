@@ -18,6 +18,8 @@ Types of changes:
 
 ### Added
 
+- Now instance scan is compatible with the new public folder structure.
+
 ## [0.1.03] - 2024-12-02
 
 ### Added
