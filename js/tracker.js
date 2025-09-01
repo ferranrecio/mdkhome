@@ -129,6 +129,14 @@ class Tracker {
         element.classList.toggle('closed', info.status == 'Closed');
         element.classList.toggle('inprogress', info.status == 'Development in progress');
 
+        const waitingIntegration = (
+            info.status == 'Waiting for component lead review'
+            || info.status == 'Component lead review in progress'
+            || info.status == 'Waiting for integration review'
+            || info.status == 'Integration review in progress'
+        );
+        element.classList.toggle('waiting-integration', waitingIntegration);
+
         setTimeout(
             () => {
                 element.classList.remove('loading');

@@ -49,6 +49,10 @@
     input[type="radio"]:focus+label {
       border-bottom: 2px solid var(--bs-primary);
     }
+
+    .waiting-integration {
+      background-color: #cbffcb;
+    }
   </style>
 </head>
 

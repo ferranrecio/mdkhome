@@ -78,7 +78,7 @@ function instance_icon_url($entry): string {
 function scan_instances(): array {
     global $CFG;
 
-    $baseversion = get_version_from_file($CFG->maininstance . "/version.php");
+    $baseversion = get_version_from_file($CFG->maininstance . "/public/version.php");
 
     $instances = [];
     if ($handle = opendir('./m')) {
@@ -148,13 +148,17 @@ function entry_info(string $entry, string $baseversion): ?stdClass {
         }
     }
 
-    $versionpath = "{$CFG->moodlesdir}/{$entry}/version.php";
-    if (file_exists($versionpath)) {
-        $info->version = get_version_from_file($versionpath);
-        $info->rebase = ($info->version < $baseversion);
-    } else {
-        $info->version = '¿?';
-        $info->rebase = false;
+    $versionpaths = [
+        "{$CFG->moodlesdir}/{$entry}/version.php",
+        "{$CFG->moodlesdir}/{$entry}/public/version.php",
+    ];
+    $info->version = '¿?';
+    $info->rebase = false;
+    foreach ($versionpaths as $versionpath) {
+        if (file_exists($versionpath)) {
+            $info->version = get_version_from_file($versionpath);
+            $info->rebase = ($info->version < $baseversion);
+        }
     }
 
     $output = [];
