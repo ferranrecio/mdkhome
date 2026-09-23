@@ -57,7 +57,7 @@ function instance_icon_url($entry): string {
     if ($entry->name == 'integration') {
         return $base . 'int_main.png';
     }
-    if (in_array($entry->name, ['master', 'main']) || strpos($entry->name, 'stable_') === 0) {
+    if (is_stable($entry->name)) {
         return $base . 'star.png';
     }
     $parts = explode('-', $entry->name);
@@ -68,6 +68,11 @@ function instance_icon_url($entry): string {
         return $base . 'labs.png';
     }
     return $base . 'moodle.png';
+}
+
+function is_stable(string $entry): bool {
+    return strpos($entry, 'master') === 0 || strpos($entry, 'main') === 0
+        || strpos($entry, 'stable_') === 0 || strpos($entry, 'wp_') === 0;
 }
 
 /**

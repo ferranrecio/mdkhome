@@ -18,6 +18,8 @@ Types of changes:
 
 ### Added
 
+- Added support for recognizing WP stable branches.
+
 ## [0.1.04] - 2025-09-01
 
 ### Added
